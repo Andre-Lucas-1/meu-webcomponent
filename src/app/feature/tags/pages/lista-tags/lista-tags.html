@@ -1,0 +1,7 @@
+<section class="crud-page">
+  <div class="crud-header"><div><span>CONFIGURAÇÃO</span><h1>Tags</h1><p>Cadastre e organize os cenários de resposta usados pelos mocks.</p></div></div>
+  <div class="form-card"><div class="field"><label>Nome</label><input [(ngModel)]="novoNome" placeholder="Ex.: sucesso"></div><div class="field wide"><label>Descrição</label><input [(ngModel)]="novaDescricao" placeholder="Descrição do cenário"></div><div class="field"><label>Tipo</label><input [(ngModel)]="novoTipo" placeholder="success"></div><button class="add" (click)="adicionar()">Adicionar tag</button></div>
+  <div class="tag-cards">
+    @for (item of tags(); track item.id) { @if(editando === item.id) { <article class="tag-card editing"><input [(ngModel)]="item.name"><input [(ngModel)]="item.description"><input [(ngModel)]="item.type"><button class="add" (click)="atualizar(item.id,item)">Salvar</button></article> } @else { <article class="tag-card"><div class="tag-top"><span class="dot"></span><strong>{{item.name}}</strong><span class="type">{{item.type || 'manual'}}</span></div><p>{{item.description || 'Sem descrição cadastrada.'}}</p><div class="tag-actions"><button class="small" (click)="iniciarEdicao(item.id)">Editar</button><button class="small danger" (click)="excluir(item.id)">Excluir</button></div></article> } }
+  </div>
+</section>

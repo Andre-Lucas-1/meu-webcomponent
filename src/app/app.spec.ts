@@ -25,6 +25,6 @@ describe('App', () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, meu-webcomponent');
+    expect(compiled.querySelector('.brand strong')?.textContent).toContain('SEFAZ-SE');
   });
 });

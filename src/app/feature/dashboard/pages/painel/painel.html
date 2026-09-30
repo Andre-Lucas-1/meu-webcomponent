@@ -1,0 +1,74 @@
+<section class="page">
+  <div class="page-header">
+    <div>
+      <span class="eyebrow">SEFAZ-SE • MOCK SERVER</span>
+      <h1>Painel do projeto</h1>
+      <p>Acompanhe os backends, endpoints e cenários disponíveis para os testes.</p>
+    </div>
+    <button class="primary-button" type="button" (click)="carregar()">
+      <span>↻</span> Atualizar dados
+    </button>
+  </div>
+
+  <div class="metric-grid">
+    <article class="metric-card">
+      <div class="metric-icon blue">⌘</div>
+      <div><strong>{{ endpointsMockados }}</strong><span>Endpoints mockados</span></div>
+    </article>
+    <article class="metric-card">
+      <div class="metric-icon navy">#</div>
+      <div><strong>{{ tagsAtivas }}</strong><span>Tags cadastradas</span></div>
+    </article>
+    <article class="metric-card">
+      <div class="metric-icon amber">!</div>
+      <div><strong>{{ revisoes }}</strong><span>Aguardando revisão</span></div>
+    </article>
+    <article class="metric-card">
+      <div class="metric-icon red">◌</div>
+      <div><strong>{{ simulacoes }}</strong><span>Cenários de falha</span></div>
+    </article>
+  </div>
+
+  <div class="content-grid">
+    <section class="panel">
+      <div class="panel-title">
+        <div><h2>Backends recentes</h2><p>Ambientes cadastrados no Mock Server.</p></div>
+        <span class="count">{{ backends().length }}</span>
+      </div>
+
+      <div *ngIf="!carregando() && backends().length === 0" class="empty-state">
+        <div class="empty-icon">⌘</div>
+        <strong>Nenhum backend encontrado</strong>
+        <span>Cadastre um backend para começar a configurar seus mocks.</span>
+      </div>
+
+      <div class="backend-list" *ngIf="backends().length > 0">
+        <article class="backend-row" *ngFor="let backend of backends()">
+          <div class="backend-mark">API</div>
+          <div class="backend-info">
+            <strong>{{ backend.description || 'Backend sem descrição' }}</strong>
+            <span>{{ backend.baseUrl || 'URL não informada' }}</span>
+          </div>
+          <div class="backend-meta">
+            <span>{{ backend.apiNumbers || 0 }} endpoints</span>
+            <span class="version">v{{ backend.version || '—' }}</span>
+          </div>
+          <span [class]="statusClasse(backend.status)">{{ backend.status || 'Sem status' }}</span>
+        </article>
+      </div>
+    </section>
+
+    <aside class="panel review-panel">
+      <div class="panel-title">
+        <div><h2>Tags cadastradas</h2><p>Cenários disponíveis para os testes.</p></div>
+      </div>
+      <div *ngIf="tags().length === 0" class="empty-small">Nenhuma tag cadastrada.</div>
+      <div class="tag-list" *ngIf="tags().length > 0">
+        <div class="tag-row" *ngFor="let tag of tags().slice(0, 7)">
+          <span class="tag-dot"></span>
+          <div><strong>{{ tag.name }}</strong><span>{{ tag.description || tag.type || 'Cenário manual' }}</span></div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>

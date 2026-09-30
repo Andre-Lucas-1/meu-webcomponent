@@ -1,0 +1,36 @@
+<section class="crud-page">
+    <div class="crud-header">
+        <div><span>CONFIGURAÇÃO</span>
+            <h1>Backends</h1>
+            <p>Gerencie os ambientes disponíveis para o Mock Server.</p>
+        </div>
+    </div>
+    <div class="form-card">
+        <div class="field"><label>Descrição</label><input [(ngModel)]="novaDescricao"
+                placeholder="Ex.: API de usuários"></div>
+        <div class="field"><label>Status</label><input [(ngModel)]="novoStatus" placeholder="Ativo"></div>
+        <div class="field wide"><label>Base URL</label><input [(ngModel)]="novaBaseUrl" placeholder="https://..."></div>
+        <div class="field"><label>Versão</label><input [(ngModel)]="novaVersao" placeholder="1.0"></div>
+        <div class="field"><label>APIs</label><input [(ngModel)]="novoApiNumbers" placeholder="0"></div><button
+            class="add" (click)="adicionar()">Adicionar backend</button>
+    </div>
+    <div class="table-card">
+        <div class="table-head"><strong>Backends cadastrados</strong><span>{{ backends().length }} registros</span>
+        </div>
+        <div class="table-row table-label"><span>Descrição</span><span>Status</span><span>Base
+                URL</span><span>Versão</span><span>APIs</span><span>Ações</span></div>
+        @for (item of backends(); track item.id) { @if(editando === item.id) { <div class="table-row">
+            <input [(ngModel)]="item.description"><input [(ngModel)]="item.status">
+            <input [(ngModel)]="item.baseUrl">
+            <input [(ngModel)]="item.version">
+            <input [(ngModel)]="item.apiNumbers">
+            <div><button class="small primary" (click)="atualizar(item.id, item)">Salvar</button></div>
+        </div> } @else { <div class="table-row">
+            <div><strong>{{ item.description || 'Sem descrição' }}</strong></div><span>{{ item.status || '—'
+                }}</span><code>{{ item.baseUrl || '—' }}</code><span>{{ item.version || '—' }}</span><span>{{
+                item.apiNumbers || 0 }}</span>
+            <div class="actions"><button class="small" (click)="iniciarEdicao(item.id)">Editar</button><button
+                    class="small danger" (click)="excluir(item.id)">Excluir</button></div>
+        </div> } }
+    </div>
+</section>
