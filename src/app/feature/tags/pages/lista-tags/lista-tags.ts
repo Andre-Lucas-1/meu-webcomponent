@@ -40,6 +40,9 @@ export class ListaTags implements OnInit {
 }
 
 excluir(id: string) {
+   if (!confirm('Tem certeza que deseja excluir essa tag?')) {
+    return;
+  }
   this.tagsService.excluir(id).subscribe(() => {
     this.tagsService.listar().subscribe((resposta: any) => {
       this.tags.set(resposta.content);

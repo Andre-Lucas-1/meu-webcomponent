@@ -1,7 +1,59 @@
-<section class="crud-page">
-  <div class="crud-header"><div><span>CONFIGURAÇÃO</span><h1>Tags</h1><p>Cadastre e organize os cenários de resposta usados pelos mocks.</p></div></div>
-  <div class="form-card"><div class="field"><label>Nome</label><input [(ngModel)]="novoNome" placeholder="Ex.: sucesso"></div><div class="field wide"><label>Descrição</label><input [(ngModel)]="novaDescricao" placeholder="Descrição do cenário"></div><div class="field"><label>Tipo</label><input [(ngModel)]="novoTipo" placeholder="success"></div><button class="add" (click)="adicionar()">Adicionar tag</button></div>
-  <div class="tag-cards">
-    @for (item of tags(); track item.id) { @if(editando === item.id) { <article class="tag-card editing"><input [(ngModel)]="item.name"><input [(ngModel)]="item.description"><input [(ngModel)]="item.type"><button class="add" (click)="atualizar(item.id,item)">Salvar</button></article> } @else { <article class="tag-card"><div class="tag-top"><span class="dot"></span><strong>{{item.name}}</strong><span class="type">{{item.type || 'manual'}}</span></div><p>{{item.description || 'Sem descrição cadastrada.'}}</p><div class="tag-actions"><button class="small" (click)="iniciarEdicao(item.id)">Editar</button><button class="small danger" (click)="excluir(item.id)">Excluir</button></div></article> } }
+<div class="banner">
+  <div>
+    <span class="eyebrow">GERENCIAMENTO</span>
+    <h1>Tags</h1>
+    <p>Crie e gerencie as tags usadas</p>
   </div>
-</section>
+  <div class="banner-icon">🏷️</div>
+</div>
+
+<div class="card">
+  <span class="eyebrow">CADASTRO</span>
+  <h2>Nova tag</h2>
+
+  <div class="field">
+    <label>Nome</label>
+    <input [(ngModel)]="novoNome" placeholder="Digite o nome">
+  </div>
+  <div class="field">
+    <label>Descrição</label>
+    <input [(ngModel)]="novaDescricao" placeholder="Digite a descrição">
+  </div>
+  <div class="field">
+    <label>Tipo</label>
+    <input [(ngModel)]="novoTipo" placeholder="Digite o tipo">
+  </div>
+
+  <button class="btn-primary" (click)="adicionar()">Salvar</button>
+</div>
+
+<div class="card">
+  <span class="eyebrow">LISTA</span>
+  <h2>Tags cadastradas</h2>
+
+  @for (item of tags(); track item) {
+    <div class="tag-row">
+      @if (editando === item.id) {
+        <div class="edit-fields">
+          <input [(ngModel)]="item.name" placeholder="Nome">
+          <input [(ngModel)]="item.description" placeholder="Descrição">
+          <input [(ngModel)]="item.type" placeholder="Tipo">
+        </div>
+        <div class="row-actions">
+          <button class="btn-primary small" (click)="atualizar(item.id, item)">Salvar</button>
+          <button class="btn-ghost small" (click)="editando = null">Cancelar</button>
+        </div>
+      } @else {
+        <div class="tag-info">
+          <strong>{{ item.name }}</strong>
+          <span class="muted">{{ item.description }}</span>
+          <span class="pill">{{ item.type }}</span>
+        </div>
+        <div class="row-actions">
+          <button class="btn-primary small" (click)="iniciarEdicao(item.id)">Editar</button>
+          <button class="btn-danger small" (click)="excluir(item.id)">Excluir</button>
+        </div>
+      }
+    </div>
+  }
+</div>

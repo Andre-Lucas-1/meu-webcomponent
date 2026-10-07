@@ -1,30 +1,13 @@
-<div class="app-shell">
+<div class="shell">
   <aside class="sidebar">
-    <div class="brand">
-      <div class="brand-mark">SE</div>
-      <div><strong>SEFAZ-SE</strong><span>Mock Server</span></div>
-    </div>
+    <div class="brand">API Center</div>
 
-    <nav class="navigation">
-      <span class="nav-label">GERENCIAMENTO</span>
-      <a routerLink="/painel" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><span>▦</span>Painel</a>
-      <a routerLink="/mocks-tags" routerLinkActive="active"><span>◇</span>Mocks e Tags</a>
-      <span class="nav-label secondary-label">CONFIGURAÇÃO</span>
-      <a routerLink="/backends" routerLinkActive="active"><span>⌘</span>Backends</a>
-      <a routerLink="/tags" routerLinkActive="active"><span>#</span>Tags</a>
-    </nav>
+    <div class="nav-section">PRINCIPAL</div>
+    <div class="nav-item active">🏷️ Tags</div>
 
-    <div class="sidebar-footer">
-      <div class="institution">Secretaria de Estado da Fazenda<br>de Sergipe</div>
-      <div class="environment"><i></i> Ambiente de desenvolvimento</div>
-    </div>
   </aside>
 
-  <div class="main-area">
-    <header class="topbar">
-      <div class="breadcrumb">Mock Server <span>/</span> <strong>{{ pageTitle }}</strong></div>
-      <div class="profile"><div class="avatar">AL</div><div><strong>André Lucas</strong><span>Desenvolvedor</span></div></div>
-    </header>
-    <main class="content"><router-outlet></router-outlet></main>
-  </div>
+  <main class="content">
+    <app-lista-tags></app-lista-tags>
+  </main>
 </div>
